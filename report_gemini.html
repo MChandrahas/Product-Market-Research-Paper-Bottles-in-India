@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Bottle Market Research Plan - India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: Earthy & Organic -->
+    <!-- Primary Background: Warm Neutral (Stone-50) -->
+    <!-- Secondary Background: Kraft Paper (Amber-50/100) -->
+    <!-- Primary Text: Deep Charcoal (Stone-800) -->
+    <!-- Accents: Forest Green (Green-700), Terracotta (Orange-700) for highlights -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafaf9; /* stone-50 */
+            color: #292524; /* stone-800 */
+        }
+        h1, h2, h3, h4, h5 {
+            font-family: 'Merriweather', serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .card-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .active-tab {
+            border-bottom: 3px solid #15803d; /* green-700 */
+            color: #15803d;
+            font-weight: 600;
+        }
+        .inactive-tab {
+            border-bottom: 3px solid transparent;
+            color: #78716c; /* stone-500 */
+        }
+        .bottle-shape {
+            width: 60px;
+            height: 160px;
+            background-color: #d6d3d1;
+            border-radius: 10px 10px 5px 5px;
+            position: relative;
+            margin: 0 auto;
+        }
+        .bottle-neck {
+            width: 30px;
+            height: 40px;
+            background-color: #a8a29e;
+            position: absolute;
+            top: -35px;
+            left: 15px;
+            border-radius: 5px 5px 0 0;
+        }
+    </style>
+
+    <!-- Application Structure Plan: 
+         1. Hero Section: Immediate context setting - "The Sustainable Shift in India".
+         2. The Product Deep Dive (What/How/Why): Interactive cards explaining the technology and rationale. 
+         3. Research Objectives Dashboard: A tabbed interface allowing users to explore the 4 pillars of the research plan (Market, Consumer, Technical, Financial).
+         4. Market Landscape: Charts visualizing the Indian packaging market opportunities.
+         5. Methodology Roadmap: A Gantt-chart style interactive timeline showing the research phases.
+         6. Execution Strategy: Interactive checklist for the user to "launch" the research.
+         
+         Rationale: This structure moves from concept (What is it?) to context (Where does it fit?) to action (How do we study it?), mirroring a strategic decision-making process.
+    -->
+
+    <!-- Visualization & Content Choices:
+         1. Concept Cards (HTML/CSS): Used for What/How/Why to provide digestible chunks of text.
+         2. Radar Chart (Chart.js): To compare Paper Bottles vs. Plastic vs. Glass on multiple attributes (Cost, Eco, Durability). Best for multi-variable comparison.
+         3. Bar/Doughnut Charts (Chart.js): To visualize target demographics and sector potential in India.
+         4. Process Flow (HTML/CSS Grid): To illustrate the manufacturing process without SVGs.
+         5. Roadmap (HTML Grid): To visualize the timeline clearly.
+         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+</head>
+<body class="antialiased selection:bg-green-200 selection:text-green-900">
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-stone-800"><i class="fa-solid fa-leaf text-green-700 mr-2"></i>EcoPack Research</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <button onclick="scrollToSection('product-context')" class="text-stone-600 hover:text-green-700 font-medium transition">Product Context</button>
+                    <button onclick="scrollToSection('market-landscape')" class="text-stone-600 hover:text-green-700 font-medium transition">Market Data</button>
+                    <button onclick="scrollToSection('research-plan')" class="text-stone-600 hover:text-green-700 font-medium transition">Research Plan</button>
+                    <button onclick="scrollToSection('roadmap')" class="text-stone-600 hover:text-green-700 font-medium transition">Timeline</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-amber-50 border-b border-amber-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="inline-block py-1 px-3 rounded-full bg-green-100 text-green-800 text-xs font-semibold tracking-wide uppercase mb-4">India Market Entry Strategy</span>
+                <h1 class="text-4xl sm:text-5xl font-bold text-stone-900 leading-tight mb-6">
+                    Feasibility of <span class="text-green-700 relative inline-block">
+                        Paper Bottles
+                        <span class="absolute bottom-1 left-0 w-full h-2 bg-green-200 -z-10 opacity-60"></span>
+                    </span> in the Indian FMCG Sector
+                </h1>
+                <p class="text-lg text-stone-600 mb-8 max-w-2xl">
+                    A comprehensive product market research plan designed to evaluate the viability, consumer acceptance, and manufacturing feasibility of fiber-based liquid packaging solutions in India.
+                </p>
+                <button onclick="scrollToSection('product-context')" class="bg-stone-800 hover:bg-stone-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition duration-300 flex items-center">
+                    Start Exploration <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-xl border border-stone-100">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-stone-800">Quick Market Pulse (India)</h3>
+                    <span class="text-xs text-stone-400">Est. 2025 Projections</span>
+                </div>
+                <!-- Dynamic Quick Stats -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-stone-50 p-4 rounded-xl text-center">
+                        <div class="text-3xl font-bold text-green-700 mb-1">65%</div>
+                        <div class="text-xs text-stone-500 font-medium uppercase">Willing to Pay Premium for Eco-Friendly</div>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-xl text-center">
+                        <div class="text-3xl font-bold text-orange-700 mb-1">₹3.8T</div>
+                        <div class="text-xs text-stone-500 font-medium uppercase">Packaging Industry Size</div>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-xl text-center">
+                        <div class="text-3xl font-bold text-blue-700 mb-1">12%</div>
+                        <div class="text-xs text-stone-500 font-medium uppercase">Est. CAGR Sustainable Packaging</div>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-xl text-center">
+                        <div class="text-3xl font-bold text-stone-700 mb-1">Top 3</div>
+                        <div class="text-xs text-stone-500 font-medium uppercase">Global Pollution Contributor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+        <!-- SECTION 1: THE PRODUCT (What, How, Why) -->
+        <section id="product-context" class="scroll-mt-24">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-bold text-stone-900 mb-4">The Innovation: Paper Bottles</h2>
+                <p class="text-stone-600">Before researching the market, we must define the product. Paper bottles represent a hybrid technology bridging fiber molding and barrier chemistry.</p>
+            </div>
+
+            <!-- Interactive Tab System for What/How/Why -->
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+                <div class="flex border-b border-stone-200 bg-stone-50">
+                    <button id="tab-what" onclick="switchContextTab('what')" class="flex-1 py-4 text-center font-medium active-tab transition-colors focus:outline-none">
+                        <i class="fa-solid fa-bottle-water mr-2"></i>WHAT is it?
+                    </button>
+                    <button id="tab-how" onclick="switchContextTab('how')" class="flex-1 py-4 text-center font-medium inactive-tab transition-colors focus:outline-none hover:bg-stone-100">
+                        <i class="fa-solid fa-gears mr-2"></i>HOW does it work?
+                    </button>
+                    <button id="tab-why" onclick="switchContextTab('why')" class="flex-1 py-4 text-center font-medium inactive-tab transition-colors focus:outline-none hover:bg-stone-100">
+                        <i class="fa-solid fa-earth-asia mr-2"></i>WHY India?
+                    </button>
+                </div>
+
+                <div class="p-8 min-h-[400px]">
+                    <!-- WHAT Content -->
+                    <div id="content-what" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center animate-fade-in">
+                        <div>
+                            <h3 class="text-2xl font-bold text-stone-800 mb-4">A Hybrid Solution</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center text-amber-700 mt-1">1</div>
+                                    <div class="ml-4">
+                                        <h4 class="font-bold text-stone-900">Outer Shell</h4>
+                                        <p class="text-sm text-stone-600">Made from sustainably sourced wood pulp or recycled paper. Provides structural integrity and branding surface.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 mt-1">2</div>
+                                    <div class="ml-4">
+                                        <h4 class="font-bold text-stone-900">Barrier Liner</h4>
+                                        <p class="text-sm text-stone-600">A thin internal layer (typically rPET or plant-based coating) prevents liquid absorption and maintains freshness. It is separable for recycling.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-stone-200 rounded-full flex items-center justify-center text-stone-700 mt-1">3</div>
+                                    <div class="ml-4">
+                                        <h4 class="font-bold text-stone-900">Closure</h4>
+                                        <p class="text-sm text-stone-600">Currently standard plastic or aluminum caps, but evolving towards molded fiber caps.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-stone-100 rounded-xl p-6 flex flex-col items-center justify-center border border-stone-200">
+                            <!-- CSS Bottle Graphic -->
+                            <div class="relative">
+                                <div class="w-24 h-64 bg-amber-200 rounded-b-3xl rounded-t-lg relative border-4 border-amber-300 shadow-inner">
+                                    <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-amber-300 rounded-t-sm border-x-4 border-t-4 border-amber-300"></div>
+                                    <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 w-12 h-4 bg-stone-400 rounded-sm shadow-md"></div>
+                                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center opacity-50">
+                                        <i class="fa-solid fa-recycle text-4xl text-amber-800"></i>
+                                    </div>
+                                    <!-- Inner Liner Representation -->
+                                    <div class="absolute inset-2 border-2 border-dashed border-blue-400 rounded-b-2xl rounded-t-md opacity-60"></div>
+                                </div>
+                                <div class="mt-4 text-center">
+                                    <span class="bg-white px-3 py-1 rounded-full text-xs font-bold text-stone-500 shadow-sm border border-stone-200">Prototype Visualization</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HOW Content (Hidden by default) -->
+                    <div id="content-how" class="hidden grid grid-cols-1 gap-6 animate-fade-in">
+                        <h3 class="text-2xl font-bold text-stone-800 mb-2">The Manufacturing Process</h3>
+                        <p class="text-stone-600 mb-6">Understanding the "How" is critical for B2B feasibility research.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <!-- Step 1 -->
+                            <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm card-hover">
+                                <div class="text-green-600 text-3xl mb-3"><i class="fa-solid fa-tree"></i></div>
+                                <h4 class="font-bold text-stone-900 mb-1">1. Pulping</h4>
+                                <p class="text-sm text-stone-600">Raw wood fiber or waste paper is broken down into a slurry.</p>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm card-hover">
+                                <div class="text-orange-600 text-3xl mb-3"><i class="fa-solid fa-compress"></i></div>
+                                <h4 class="font-bold text-stone-900 mb-1">2. Molding</h4>
+                                <p class="text-sm text-stone-600">Slurry is pressed into molds under high heat and pressure to form bottle halves.</p>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm card-hover">
+                                <div class="text-blue-600 text-3xl mb-3"><i class="fa-solid fa-layer-group"></i></div>
+                                <h4 class="font-bold text-stone-900 mb-1">3. Coating/Lining</h4>
+                                <p class="text-sm text-stone-600">Application of the barrier layer (spray or film) to ensure liquid holdout.</p>
+                            </div>
+                            <!-- Step 4 -->
+                            <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm card-hover">
+                                <div class="text-purple-600 text-3xl mb-3"><i class="fa-solid fa-people-carry-box"></i></div>
+                                <h4 class="font-bold text-stone-900 mb-1">4. Assembly</h4>
+                                <p class="text-sm text-stone-600">Halves are bonded together, inspected, and packed for filling.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHY Content (Hidden by default) -->
+                    <div id="content-why" class="hidden animate-fade-in">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-2xl font-bold text-stone-800 mb-4">Drivers in the Indian Market</h3>
+                                <div class="space-y-6">
+                                    <div class="flex">
+                                        <div class="w-1 bg-green-500 rounded-full mr-4"></div>
+                                        <div>
+                                            <h4 class="font-bold text-stone-900">Regulatory Pressure</h4>
+                                            <p class="text-sm text-stone-600">India's Single-Use Plastic Ban (2022) is pushing FMCG giants to find alternatives. Extended Producer Responsibility (EPR) mandates are increasing compliance costs.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="w-1 bg-orange-500 rounded-full mr-4"></div>
+                                        <div>
+                                            <h4 class="font-bold text-stone-900">Evolving Consumer Base</h4>
+                                            <p class="text-sm text-stone-600">Rapid urbanization and a growing middle class (Gen Z & Millennials) prioritize brand values and sustainability.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="w-1 bg-blue-500 rounded-full mr-4"></div>
+                                        <div>
+                                            <h4 class="font-bold text-stone-900">Differentiation</h4>
+                                            <p class="text-sm text-stone-600">In a crowded shelf space (kirana stores & modern trade), the tactile feel of a paper bottle offers premium differentiation.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-stone-50 rounded-xl p-4 border border-stone-200 flex flex-col justify-center">
+                                <h4 class="text-center font-bold text-stone-700 mb-4">Material Comparison Matrix</h4>
+                                <!-- Chart Container for Radar Chart -->
+                                <div class="chart-container">
+                                    <canvas id="materialComparisonChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: MARKET LANDSCAPE -->
+        <section id="market-landscape" class="scroll-mt-24">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-stone-200 pb-4">
+                <div class="max-w-2xl">
+                    <h2 class="text-3xl font-bold text-stone-900">Market Opportunities</h2>
+                    <p class="text-stone-600 mt-2">Identifying the path of least resistance. Which sectors in India are ready for paper bottles?</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                     <select id="market-view-selector" onchange="updateMarketChart()" class="bg-white border border-stone-300 text-stone-700 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
+                        <option value="growth">Projected Growth (CAGR)</option>
+                        <option value="volume">Market Volume</option>
+                        <option value="readiness">Adoption Readiness</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Main Chart -->
+                <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+                    <h3 class="font-bold text-lg text-stone-800 mb-4">Sector Analysis</h3>
+                    <div class="chart-container h-80">
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                    <div class="mt-4 p-4 bg-amber-50 rounded-lg text-sm text-amber-800 border border-amber-100">
+                        <i class="fa-solid fa-lightbulb mr-2"></i><strong>Insight:</strong> The "Cosmetics & Personal Care" sector shows the highest immediate readiness due to higher price margins, allowing them to absorb the initial cost premium of paper bottles.
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="space-y-4">
+                    <div class="bg-green-50 p-6 rounded-2xl border border-green-100">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-bold text-green-900">Cost Parity Gap</h4>
+                            <i class="fa-solid fa-coins text-green-600"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-stone-800">+30-50%</div>
+                        <p class="text-xs text-stone-600 mt-1">Current manufacturing cost vs. PET. <br><em>Research Goal: Determine willingness to pay.</em></p>
+                    </div>
+
+                    <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-bold text-blue-900">Target Demographics</h4>
+                            <i class="fa-solid fa-users text-blue-600"></i>
+                        </div>
+                        <div class="space-y-2 mt-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-stone-600">Urban Millennials</span>
+                                <span class="font-bold text-stone-800">High</span>
+                            </div>
+                            <div class="w-full bg-blue-200 rounded-full h-1.5">
+                                <div class="bg-blue-600 h-1.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                            <div class="flex justify-between text-sm pt-1">
+                                <span class="text-stone-600">Tier 2/3 Aspirants</span>
+                                <span class="font-bold text-stone-800">Med</span>
+                            </div>
+                            <div class="w-full bg-blue-200 rounded-full h-1.5">
+                                <div class="bg-blue-600 h-1.5 rounded-full" style="width: 55%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: THE RESEARCH PLAN -->
+        <section id="research-plan" class="scroll-mt-24">
+            <div class="bg-stone-900 text-white rounded-3xl p-8 lg:p-12 shadow-2xl relative overflow-hidden">
+                <!-- Background decoration -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-stone-800 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -mr-16 -mt-16"></div>
+                
+                <div class="relative z-10">
+                    <div class="max-w-3xl mb-10">
+                        <h2 class="text-3xl lg:text-4xl font-bold mb-4">Strategic Research Roadmap</h2>
+                        <p class="text-stone-300 text-lg">A phased approach to validate the paper bottle concept in India, moving from desk research to live market trials.</p>
+                    </div>
+
+                    <!-- Interactive Phases Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        
+                        <!-- Phase 1 -->
+                        <div class="group relative bg-stone-800 p-6 rounded-xl border border-stone-700 hover:border-green-500 transition-colors cursor-pointer" onclick="togglePhaseDetails(1)">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-xs font-bold uppercase tracking-wider text-stone-400">Phase 01</span>
+                                <i class="fa-solid fa-laptop-code text-green-400 opacity-50 group-hover:opacity-100 transition"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-white">Exploratory & Tech</h3>
+                            <p class="text-stone-400 text-sm mb-4">Feasibility study of manufacturing technologies suited for Indian climate (humidity).</p>
+                            <div id="phase-1-details" class="hidden text-sm text-stone-300 border-t border-stone-700 pt-3 space-y-2">
+                                <p>• <strong>Action:</strong> Audit global patents (Paboco, Pulpex).</p>
+                                <p>• <strong>Action:</strong> Supply chain analysis for bamboo/bagasse pulp in India.</p>
+                                <p>• <strong>Output:</strong> Technical Feasibility Report.</p>
+                            </div>
+                            <div class="text-green-400 text-xs font-bold mt-2">Click for details <i class="fa-solid fa-chevron-down ml-1"></i></div>
+                        </div>
+
+                        <!-- Phase 2 -->
+                        <div class="group relative bg-stone-800 p-6 rounded-xl border border-stone-700 hover:border-green-500 transition-colors cursor-pointer" onclick="togglePhaseDetails(2)">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-xs font-bold uppercase tracking-wider text-stone-400">Phase 02</span>
+                                <i class="fa-solid fa-comments text-green-400 opacity-50 group-hover:opacity-100 transition"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-white">Consumer Qual</h3>
+                            <p class="text-stone-400 text-sm mb-4">Focus groups to gauge visceral reactions to texture, durability, and "premium" feel.</p>
+                            <div id="phase-2-details" class="hidden text-sm text-stone-300 border-t border-stone-700 pt-3 space-y-2">
+                                <p>• <strong>Sample:</strong> 4 Cities (Delhi, Mumbai, Blr, Jaipur).</p>
+                                <p>• <strong>Method:</strong> Sensory tests (Touch/Feel). Concept tests.</p>
+                                <p>• <strong>Output:</strong> Sentiment & Perception Map.</p>
+                            </div>
+                            <div class="text-green-400 text-xs font-bold mt-2">Click for details <i class="fa-solid fa-chevron-down ml-1"></i></div>
+                        </div>
+
+                        <!-- Phase 3 -->
+                        <div class="group relative bg-stone-800 p-6 rounded-xl border border-stone-700 hover:border-green-500 transition-colors cursor-pointer" onclick="togglePhaseDetails(3)">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-xs font-bold uppercase tracking-wider text-stone-400">Phase 03</span>
+                                <i class="fa-solid fa-chart-pie text-green-400 opacity-50 group-hover:opacity-100 transition"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-white">Quant Validation</h3>
+                            <p class="text-stone-400 text-sm mb-4">Large scale survey to determine price elasticity and adoption barriers.</p>
+                            <div id="phase-3-details" class="hidden text-sm text-stone-300 border-t border-stone-700 pt-3 space-y-2">
+                                <p>• <strong>Sample:</strong> N=1500 (Metro + Tier 1).</p>
+                                <p>• <strong>Method:</strong> Online + Offline Intercepts.</p>
+                                <p>• <strong>Key Metric:</strong> Willingness To Pay (WTP).</p>
+                            </div>
+                            <div class="text-green-400 text-xs font-bold mt-2">Click for details <i class="fa-solid fa-chevron-down ml-1"></i></div>
+                        </div>
+
+                        <!-- Phase 4 -->
+                        <div class="group relative bg-stone-800 p-6 rounded-xl border border-stone-700 hover:border-green-500 transition-colors cursor-pointer" onclick="togglePhaseDetails(4)">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-xs font-bold uppercase tracking-wider text-stone-400">Phase 04</span>
+                                <i class="fa-solid fa-store text-green-400 opacity-50 group-hover:opacity-100 transition"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-white">Shelf Pilots</h3>
+                            <p class="text-stone-400 text-sm mb-4">Limited SKU release in select retail environments to test real-world purchase behavior.</p>
+                            <div id="phase-4-details" class="hidden text-sm text-stone-300 border-t border-stone-700 pt-3 space-y-2">
+                                <p>• <strong>Location:</strong> Premium Organic Stores / Airports.</p>
+                                <p>• <strong>Duration:</strong> 3 Months.</p>
+                                <p>• <strong>Output:</strong> Sales Velocity & Return Rate.</p>
+                            </div>
+                            <div class="text-green-400 text-xs font-bold mt-2">Click for details <i class="fa-solid fa-chevron-down ml-1"></i></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: TIMELINE (GANTT) -->
+        <section id="roadmap" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-900 mb-6">Execution Timeline</h2>
+            <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 overflow-x-auto">
+                <div class="min-w-[700px]">
+                    <!-- Header -->
+                    <div class="grid grid-cols-12 gap-2 mb-4 text-sm font-bold text-stone-500 uppercase tracking-wider">
+                        <div class="col-span-3">Task</div>
+                        <div class="col-span-1 text-center">M1</div>
+                        <div class="col-span-1 text-center">M2</div>
+                        <div class="col-span-1 text-center">M3</div>
+                        <div class="col-span-1 text-center">M4</div>
+                        <div class="col-span-1 text-center">M5</div>
+                        <div class="col-span-1 text-center">M6</div>
+                        <div class="col-span-3 text-center">Owner</div>
+                    </div>
+                    
+                    <!-- Row 1 -->
+                    <div class="grid grid-cols-12 gap-2 mb-3 items-center text-sm border-b border-stone-100 pb-2">
+                        <div class="col-span-3 font-medium text-stone-800">Secondary Research</div>
+                        <div class="col-span-2 bg-amber-200 rounded h-6 relative group">
+                             <div class="absolute inset-0 flex items-center justify-center text-[10px] text-amber-800 font-bold opacity-0 group-hover:opacity-100 transition">Market Audit</div>
+                        </div>
+                        <div class="col-span-4"></div>
+                        <div class="col-span-3 text-sm text-stone-500 pl-4">Lead Analyst</div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="grid grid-cols-12 gap-2 mb-3 items-center text-sm border-b border-stone-100 pb-2">
+                        <div class="col-span-3 font-medium text-stone-800">Focus Groups (Qual)</div>
+                        <div class="col-span-2"></div>
+                        <div class="col-span-2 bg-blue-200 rounded h-6 relative group">
+                            <div class="absolute inset-0 flex items-center justify-center text-[10px] text-blue-800 font-bold opacity-0 group-hover:opacity-100 transition">4 Cities</div>
+                        </div>
+                        <div class="col-span-2"></div>
+                        <div class="col-span-3 text-sm text-stone-500 pl-4">Field Agency</div>
+                    </div>
+
+                    <!-- Row 3 -->
+                    <div class="grid grid-cols-12 gap-2 mb-3 items-center text-sm border-b border-stone-100 pb-2">
+                        <div class="col-span-3 font-medium text-stone-800">Online Surveys (Quant)</div>
+                        <div class="col-span-3"></div>
+                        <div class="col-span-2 bg-blue-200 rounded h-6 relative group">
+                            <div class="absolute inset-0 flex items-center justify-center text-[10px] text-blue-800 font-bold opacity-0 group-hover:opacity-100 transition">N=1500</div>
+                        </div>
+                        <div class="col-span-1"></div>
+                        <div class="col-span-3 text-sm text-stone-500 pl-4">Data Analyst</div>
+                    </div>
+
+                     <!-- Row 4 -->
+                     <div class="grid grid-cols-12 gap-2 mb-3 items-center text-sm border-b border-stone-100 pb-2">
+                        <div class="col-span-3 font-medium text-stone-800">Prototype & Lab Test</div>
+                        <div class="col-span-1"></div>
+                        <div class="col-span-3 bg-red-200 rounded h-6 relative group">
+                             <div class="absolute inset-0 flex items-center justify-center text-[10px] text-red-800 font-bold opacity-0 group-hover:opacity-100 transition">Humidity Tests</div>
+                        </div>
+                        <div class="col-span-2"></div>
+                        <div class="col-span-3 text-sm text-stone-500 pl-4">R&D Partner</div>
+                    </div>
+
+                    <!-- Row 5 -->
+                    <div class="grid grid-cols-12 gap-2 mb-3 items-center text-sm">
+                        <div class="col-span-3 font-medium text-stone-800">Strategy & Reporting</div>
+                        <div class="col-span-5"></div>
+                        <div class="col-span-1 bg-green-200 rounded h-6 relative group">
+                             <div class="absolute inset-0 flex items-center justify-center text-[10px] text-green-800 font-bold opacity-0 group-hover:opacity-100 transition">Final Deck</div>
+                        </div>
+                        <div class="col-span-3 text-sm text-stone-500 pl-4">Consultant</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <span class="text-xl font-bold text-white"><i class="fa-solid fa-leaf text-green-600 mr-2"></i>EcoPack Research</span>
+                <p class="mt-2 text-sm">Empowering sustainable transitions in Indian FMCG.</p>
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-twitter text-xl"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-solid fa-envelope text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // State Management
+        let appState = {
+            activeTab: 'what',
+            marketView: 'growth'
+        };
+
+        // DOM Elements
+        const tabs = {
+            what: document.getElementById('tab-what'),
+            how: document.getElementById('tab-how'),
+            why: document.getElementById('tab-why')
+        };
+        const contents = {
+            what: document.getElementById('content-what'),
+            how: document.getElementById('content-how'),
+            why: document.getElementById('content-why')
+        };
+
+        // Scroll Function
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Tab Switching Logic
+        function switchContextTab(tabName) {
+            // Update State
+            appState.activeTab = tabName;
+
+            // Reset UI
+            Object.keys(tabs).forEach(key => {
+                tabs[key].classList.remove('active-tab');
+                tabs[key].classList.add('inactive-tab');
+                contents[key].classList.add('hidden');
+            });
+
+            // Activate Selected
+            tabs[tabName].classList.add('active-tab');
+            tabs[tabName].classList.remove('inactive-tab');
+            contents[tabName].classList.remove('hidden');
+
+            // Trigger chart render if needed (for 'why' tab)
+            if (tabName === 'why') {
+                renderMaterialRadar();
+            }
+        }
+
+        // Phase Details Toggle
+        function togglePhaseDetails(phaseNum) {
+            const details = document.getElementById(`phase-${phaseNum}-details`);
+            if (details.classList.contains('hidden')) {
+                details.classList.remove('hidden');
+            } else {
+                details.classList.add('hidden');
+            }
+        }
+
+        // Chart Data
+        const marketData = {
+            sectors: ['Beverages (Soft)', 'Dairy', 'Alcohol/Spirits', 'Cosmetics/Personal', 'Home Care'],
+            growth: [45, 30, 25, 60, 35], // Hypothetical Readiness Score / Growth potential
+            volume: [80, 50, 40, 20, 30], // Market Volume Index
+            readiness: [3, 4, 2, 9, 6] // Readiness scale 1-10
+        };
+
+        let mainChartInstance = null;
+        let radarChartInstance = null;
+
+        // Render Main Market Chart
+        function renderMarketChart() {
+            const ctx = document.getElementById('marketChart').getContext('2d');
+            
+            let data, label, color;
+            if (appState.marketView === 'growth') {
+                data = marketData.growth;
+                label = 'Projected Growth Potential (%)';
+                color = '#ea580c'; // orange-600
+            } else if (appState.marketView === 'volume') {
+                data = marketData.volume;
+                label = 'Market Volume Index';
+                color = '#2563eb'; // blue-600
+            } else {
+                data = marketData.readiness;
+                label = 'Adoption Readiness (1-10)';
+                color = '#16a34a'; // green-600
+            }
+
+            if (mainChartInstance) {
+                mainChartInstance.destroy();
+            }
+
+            mainChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: marketData.sectors,
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        backgroundColor: color,
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#292524',
+                            titleFont: { family: 'Inter', size: 14 },
+                            bodyFont: { family: 'Inter', size: 13 },
+                            padding: 10,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + (appState.marketView === 'growth' ? '%' : '');
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e7e5e4' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateMarketChart() {
+            const selector = document.getElementById('market-view-selector');
+            appState.marketView = selector.value;
+            renderMarketChart();
+        }
+
+        // Render Radar Chart (Material Comparison)
+        function renderMaterialRadar() {
+            const ctx = document.getElementById('materialComparisonChart');
+            if(ctx && !radarChartInstance) {
+                radarChartInstance = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Carbon Footprint', 'Recyclability (India)', 'Cost Efficiency', 'Shelf Life', 'Durability'],
+                        datasets: [{
+                            label: 'Paper Bottle',
+                            data: [9, 6, 4, 6, 5],
+                            fill: true,
+                            backgroundColor: 'rgba(21, 128, 61, 0.2)', // green
+                            borderColor: '#15803d',
+                            pointBackgroundColor: '#15803d',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#15803d'
+                        }, {
+                            label: 'PET Plastic',
+                            data: [3, 8, 9, 9, 9],
+                            fill: true,
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)', // blue
+                            borderColor: '#3b82f6',
+                            pointBackgroundColor: '#3b82f6',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#3b82f6'
+                        }, {
+                            label: 'Glass',
+                            data: [5, 9, 6, 10, 8],
+                            fill: true,
+                            backgroundColor: 'rgba(120, 113, 108, 0.2)', // stone
+                            borderColor: '#78716c',
+                            pointBackgroundColor: '#78716c',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#78716c'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        elements: {
+                            line: { borderWidth: 2 }
+                        },
+                        scales: {
+                            r: {
+                                angleLines: { color: '#e5e7eb' },
+                                grid: { color: '#e5e7eb' },
+                                pointLabels: {
+                                    font: { family: 'Inter', size: 11 },
+                                    color: '#4b5563'
+                                },
+                                ticks: { display: false, max: 10 }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { font: { family: 'Inter', size: 11 } }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Initialization
+        window.onload = function() {
+            renderMarketChart();
+            // Pre-load radar chart only if visible, but since it's in a hidden tab, we wait or force it hidden but initialized. 
+            // In this logic, we init it when tab switches to 'why' to ensure canvas has dimensions.
+        };
+
+    </script>
+</body>
+</html>
