@@ -333,8 +333,63 @@
                     </div>
                 </div>
 
-                <!-- Stats Cards -->
+                <!-- Stats Cards & Investment -->
                 <div class="space-y-4">
+                    <!-- Investment Card (Updated with Breakdown) -->
+                    <div class="bg-stone-800 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden group transition-all duration-300" id="inv-card">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="text-stone-300 text-xs font-bold uppercase tracking-wider mb-1">Est. Initial Investment</h4>
+                                <div class="text-3xl font-bold text-white">₹12.5 Cr <span class="text-sm font-normal text-stone-400">($1.5M)</span></div>
+                                <p class="text-xs text-stone-400">Pilot semi-automated line (30 bottles/min).</p>
+                            </div>
+                            <button onclick="toggleFinancials(this)" class="text-xs bg-stone-700 hover:bg-stone-600 border border-stone-600 px-3 py-1 rounded text-white transition">
+                                View Breakdown
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="chart-container" style="height: 120px; width: 100%;">
+                                <canvas id="investmentChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Collapsible Details Table -->
+                        <div id="inv-details" class="hidden mt-4 pt-4 border-t border-stone-700 animate-fade-in">
+                            <table class="w-full text-sm text-left text-stone-300">
+                                <thead class="text-xs text-stone-500 uppercase bg-stone-900/50">
+                                    <tr>
+                                        <th class="px-2 py-1 rounded-l">Category</th>
+                                        <th class="px-2 py-1 text-right">Cost (₹)</th>
+                                        <th class="px-2 py-1 rounded-r">Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-stone-700">
+                                    <tr>
+                                        <td class="px-2 py-2 font-medium text-green-400">Machinery</td>
+                                        <td class="px-2 py-2 text-right">6.9 Cr</td>
+                                        <td class="px-2 py-2 text-xs text-stone-400">Molding & Drying Units</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 font-medium text-amber-400">Infra</td>
+                                        <td class="px-2 py-2 text-right">2.5 Cr</td>
+                                        <td class="px-2 py-2 text-xs text-stone-400">Plant & Water Treatment</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 font-medium text-blue-400">Licensing</td>
+                                        <td class="px-2 py-2 text-right">1.9 Cr</td>
+                                        <td class="px-2 py-2 text-xs text-stone-400">IP/Tech Transfer Fees</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 font-medium text-stone-400">Working Cap</td>
+                                        <td class="px-2 py-2 text-right">1.2 Cr</td>
+                                        <td class="px-2 py-2 text-xs text-stone-400">3-Month Opex/Raw Mat.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                     <div class="bg-green-50 p-6 rounded-2xl border border-green-100">
                         <div class="flex items-center justify-between mb-2">
                             <h4 class="font-bold text-green-900">Cost Parity Gap</h4>
@@ -601,6 +656,20 @@
             }
         }
 
+        // Toggle Financial Details (Fixed ReferenceError)
+        function toggleFinancials(btn) {
+            const details = document.getElementById('inv-details');
+            if (details.classList.contains('hidden')) {
+                details.classList.remove('hidden');
+                btn.innerHTML = 'Hide Breakdown';
+                btn.classList.add('bg-stone-600');
+            } else {
+                details.classList.add('hidden');
+                btn.innerHTML = 'View Breakdown';
+                btn.classList.remove('bg-stone-600');
+            }
+        }
+
         // Chart Data
         const marketData = {
             sectors: ['Beverages (Soft)', 'Dairy', 'Alcohol/Spirits', 'Cosmetics/Personal', 'Home Care'],
@@ -611,6 +680,7 @@
 
         let mainChartInstance = null;
         let radarChartInstance = null;
+        let investmentChartInstance = null;
 
         // Render Main Market Chart
         function renderMarketChart() {
@@ -680,6 +750,49 @@
             const selector = document.getElementById('market-view-selector');
             appState.marketView = selector.value;
             renderMarketChart();
+        }
+
+        // Render Investment Breakdown Chart (Fixed Syntax Error)
+        function renderInvestmentChart() {
+            const ctx = document.getElementById('investmentChart').getContext('2d');
+            
+            if (investmentChartInstance) {
+                investmentChartInstance.destroy();
+            }
+
+            investmentChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Machinery & Molds', 'Land & Infra', 'R&D/Licensing', 'Working Capital'],
+                    datasets: [{
+                        data: [55, 20, 15, 10], // Percentage breakdown
+                        backgroundColor: [
+                            '#22c55e', // green-500
+                            '#f59e0b', // amber-500
+                            '#3b82f6', // blue-500
+                            '#a8a29e'  // stone-400
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#292524',
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.parsed + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
         }
 
         // Render Radar Chart (Material Comparison)
@@ -753,8 +866,7 @@
         // Initialization
         window.onload = function() {
             renderMarketChart();
-            // Pre-load radar chart only if visible, but since it's in a hidden tab, we wait or force it hidden but initialized. 
-            // In this logic, we init it when tab switches to 'why' to ensure canvas has dimensions.
+            renderInvestmentChart();
         };
 
     </script>
